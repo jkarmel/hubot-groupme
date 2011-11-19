@@ -1,23 +1,19 @@
 {
-  "name":        "hubot-twilio",
-  "version":     "2.0.0",
-  "author":      "Tom Bell",
-  "keywords":    "github hubot twilio adapter",
-  "description": "A Twilio adapter for hubot",
+  "name":        "hubot-groupme",
+  "version":     "2.1.0",
+  "author":      "Jeremy Karemel",
+  "keywords":    "hubot-groupme adapter",
+  "description": "Uses twilio to allow interaction with GroupMe",
   "licenses":     [{
-    "type":       "MIT",
-    "url":        "http://github.com/tombell/hubot-twilio/raw/master/LICENSE"
+    "type":       "MIT"
   }],
   "repository" : {
     "type" : "git",
-    "url" : "http://github.com/tombell/hubot-twilio.git"
-  },
-  "dependencies": {
-    "hubot": "2.0.0"
+    "url" : "http://github.com/jkarmel/hubot-groupme.git"
   },
   "devDependencies": {
     "coffee-script": "1.1.3"
+    "hubot-twilio": "http://github.com/jkarmel/hubot-twilio.git"
   },
-  "main": "./src/twilio",
-  "engine": "node > 0.6.0 < 0.7.0"
+  "main": "./src/twilio"
 }

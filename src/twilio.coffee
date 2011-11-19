@@ -1,78 +1,21 @@
-Robot = require("hubot").robot()
-HTTP  = require 'http'
-QS    = require 'querystring'
+{TextMessage}   = require("hubot")
+TwilioAdapter = require "hubot-twilio"
 
-class Twilio extends Robot.Adapter
-  constructor: (robot) ->
-    @sid   = process.env.HUBOT_SMS_SID
-    @token = process.env.HUBOT_SMS_TOKEN
-    @from  = process.env.HUBOT_SMS_FROM
-    super robot
-
-  send: (user, strings...) ->
-    message = strings.join "\n"
-
-    for msg in @split_long_sms(message)
-      @send_sms message, user.id, (err, body) ->
-        if err or not body?
-          console.log "Error sending reply SMS: #{err}"
-        else
-          console.log "Sending reply SMS: #{message} to #{user.id}"
-
-  reply: (user, strings...) ->
-    @send user, str for str in strings
-
-  respond: (regex, callback) ->
-    @hear regex, callback
-
-  run: ->
-    server = HTTP.createServer (request, response) =>
-      payload = QS.parse(request.url)
-
-      if payload.Body? and payload.From?
-        console.log "Received SMS: #{payload.Body} from #{payload.From}"
-        @receive_sms(payload.Body, payload.From)
-
-      response.writeHead 200, 'Content-Type': 'text/plain'
-      response.end()
-
-    server.listen (parseInt(process.env.PORT) or 8080), "0.0.0.0"
-
-  receive_sms: (body, from) ->
+class GroupMe extends TwilioAdapter
+  receive_sms: (smsBody, from) ->
     return if body.length is 0
     user = @userForId from
-    @receive new Robot.TextMessage user, body
 
-  send_sms: (message, to, callback) ->
-    auth = new Buffer(@sid + ':' + @token).toString("base64")
-    data = QS.stringify From: @from, To: to, Body: message
+		# TODO Assign self.robot.name here instead of 
+    # if body.match(/^Nurph\b/i) is null
+    #   console.log "I'm adding 'Nurph' as a prefix."
+    #   body = 'Nurph' + '' + body
 
-    @http("https://api.twilio.com")
-      .path("/2010-04-01/Accounts/#{@sid}/SMS/Messages.json")
-      .header("Authorization", "Basic #{auth}")
-      .header("Content-Type", "application/x-www-form-urlencoded")
-      .post(data) (err, res, body) ->
-        if err
-          callback err
-        else if res.statusCode is 201
-          json = JSON.parse(body)
-          callback null, body
-        else
-          json = JSON.parse(body)
-          callback body.message
+    # GroupMe prepends username so need to remove that
+    message = smsBody.slice smsBody.indexOf(":") + 2)
 
-  split_long_sms: (message) ->
-    strs = []
-    while str.length > 150
-      pos = str.substring(0, 150).lastIndexOf(" ")
-      pos = (if pos <= 0 then 150 else pos)
-      strs.push str.substring(0, pos)
-      i = str.indexOf(" ", pos) + 1
-      i = pos  if i < pos or i > pos + 150
-      str = str.substring(i)
-    strs.push str
-    strs
+    @receive new TextMessage user, message
 
 exports.use = (robot) ->
-  new Twilio robot
+  new GroupMe robot
 
