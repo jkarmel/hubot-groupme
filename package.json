@@ -12,5 +12,5 @@
     "hubot" : ">=0.0.1",
     "hubot-twilio": "git://github.com/jkarmel/hubot-twilio.git"
   },
-  "main": "./src/twilio"
+  "main": "./src/groupme"
 }
