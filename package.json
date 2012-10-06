@@ -1,7 +1,7 @@
 {
 
   "name":        "hubot-groupme",
-  "version":     "2.1.0",
+  "version":     "1.0.0",
   "author":      "Jeremy Karemel",
   "keywords":    "hubot-groupme adapter",
   "description": "Uses twilio to allow interaction with GroupMe",
