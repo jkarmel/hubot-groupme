@@ -10,7 +10,7 @@
   "dependencies" :{
     "coffee-script": "1.1.3",
     "hubot" : ">=0.0.1",
-    "hubot-twilio": "git://github.com/jkarmel/hubot-twilio.git#master"
+    "hubot-twilio": "git://github.com/jkarmel/hubot-twilio.git"
   },
   "main": "./src/twilio"
 }
