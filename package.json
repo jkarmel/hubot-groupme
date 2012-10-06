@@ -1,4 +1,5 @@
 {
+
   "name":        "hubot-groupme",
   "version":     "2.1.0",
   "author":      "Jeremy Karemel",
@@ -13,6 +14,9 @@
   },
   "devDependencies": {
     "coffee-script": "1.1.3"
+  },
+  "dependencies" :{
+    "hubot-twilio": "http://github.com/jkarmel/hubot-twilio.git"
   },
   "main": "./src/twilio"
 }
