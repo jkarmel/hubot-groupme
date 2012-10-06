@@ -12,7 +12,7 @@ class GroupMe extends TwilioAdapter
     #   body = 'Nurph' + '' + body
 
     # GroupMe prepends username so need to remove that
-    message = smsBody.slice smsBody.indexOf(":") + 2)
+    message = smsBody.slice smsBody.indexOf(":") + 2 
 
     @receive new TextMessage user, message
 
