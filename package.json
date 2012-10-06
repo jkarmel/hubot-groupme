@@ -13,6 +13,8 @@
   },
   "devDependencies": {
     "coffee-script": "1.1.3"
+  },
+  "dependancies" {
     "hubot-twilio": "http://github.com/jkarmel/hubot-twilio.git"
   },
   "main": "./src/twilio"
