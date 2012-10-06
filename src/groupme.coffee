@@ -1,5 +1,5 @@
 {TextMessage}   = require("hubot")
-TwilioAdapter = require "hubot-twilio"
+TwilioAdapter = require("hubot-twilio").Twilio
 
 class GroupMe extends TwilioAdapter
   receive_sms: (smsBody, from) ->
