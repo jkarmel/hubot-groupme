@@ -11,6 +11,10 @@ class GroupMe extends TwilioAdapter
     #   console.log "I'm adding 'Nurph' as a prefix."
     #   body = 'Nurph' + '' + body
 
+    if smsBody.indexOf("You've been added to a group with") == 0
+      console.log "got init methods"
+      @send_sms "hubot joining!", from, (args...)-> console.log args
+
     # GroupMe prepends "(username): " so need to remove that
     message = smsBody.slice smsBody.indexOf(":") + 2 
 
